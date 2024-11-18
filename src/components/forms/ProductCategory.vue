@@ -1,4 +1,5 @@
 <script setup>
+import { useCategoryStore } from '../../stores/categoryStore';
 
 
 const category = {
@@ -11,14 +12,14 @@ const category = {
 
 <template>
     <div class="category-container">
-            <a-form class="form-container">
-                <a-input v-model:value="category.title" placeholder="Enter category title" />
-                <a-input v-model:value="category.routeName" placeholder="Enter route name" />
-                <a-input v-model:value="category.imageUrl" placeholder="Enter image url" />
-                <a-button type="primary">Add category</a-button>
-            </a-form>
+        <a-form class="form-container">
+            <a-input v-model:value="category.title" placeholder="Enter category title" />
+            <a-input v-model:value="category.routeName" placeholder="Enter route name" />
+            <a-input v-model:value="category.imageUrl" placeholder="Enter image url" />
+            <a-button type="primary">Add category</a-button>
+        </a-form>
         <a-divider />
-       
+
     </div>
 </template>
 
