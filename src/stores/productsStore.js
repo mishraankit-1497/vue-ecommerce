@@ -78,10 +78,10 @@ export const useProductStore = defineStore("productsStore", {
     async updateProduct(product) {
       try {
         const response = await axios.put(
-          `http://localhost:3000/shop/${product.id}`,
+          `http://localhost:3000/shop`,
           product
         );
-        const index = this.products.findIndex((p) => p.id === product.id);
+        const index = this.products.findIndex((p) => p.id === product.items[0].id);
         if (index !== -1) {
           this.products[index] = response.data;
         }
