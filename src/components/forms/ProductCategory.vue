@@ -1,11 +1,54 @@
-<script setup>
+<script>
 import { useCategoryStore } from '../../stores/categoryStore';
 
 
-const category = {
-    title: "",
-    imageUrl: "",
-    routeName: ""
+
+export default {
+    props: {
+        categoryToEdit: {
+            type: Object,
+            default: () => null
+        },
+
+    },
+    data() {
+        return {
+            category: {
+                id: "",
+                title: "",
+                imageUrl: "",
+                routeName: ""
+            },
+            isEdit: false
+        }
+    },
+    watch: {
+        categoryToEdit: {
+            immediate: true,
+            handler(newValue) {
+                if (newValue) {
+                    this.category = { ...newValue }
+                    this.isEdit = true
+                }
+            }
+        }
+    },
+    methods: {
+        submitCategory() {
+            const action = this.isEdit ? "updateCategory" : "addCategory"
+            this.$emit(action, this.category)
+            this.resetForm();
+        },
+        resetForm() {
+            this.category = {
+                id: "",
+                title: "",
+                imageUrl: "",
+                routeName: ""
+            }
+            this.isEdit = false;
+        }
+    }
 }
 
 </script>
@@ -13,6 +56,7 @@ const category = {
 <template>
     <div class="category-container">
         <a-form class="form-container" @submit.prevent="submitCategory">
+            <a-input v-model:value="category.id" id="id" placeholder="Enter category id" />
             <a-input v-model:value="category.title" id="title" placeholder="Enter category title" />
             <a-input v-model:value="category.routeName" id="routeName" placeholder="Enter route name" />
             <a-input v-model:value="category.imageUrl" id="imageUrl" placeholder="Enter image url" />
