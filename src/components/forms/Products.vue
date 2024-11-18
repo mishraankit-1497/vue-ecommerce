@@ -14,7 +14,7 @@ export default {
                 name: "",
                 imageUrl: "",
                 price: "",
-                category: ""
+                categoryId: ""
             },
             isEdit: false
         }
@@ -42,7 +42,7 @@ export default {
                 name: "",
                 imageUrl: "",
                 price: "",
-                category: ""
+                categoryId: ""
             }
             this.isEdit = false;
         }
@@ -58,7 +58,7 @@ export default {
             <a-input v-model:value="product.name" placeholder="Enter product name" />
             <a-input v-model:value="product.imageUrl" placeholder="Enter image url" />
             <a-input v-model:value="product.price" placeholder="Enter price" />
-            <a-input v-model:value="product.category" placeholder="Enter product category" />
+            <a-input v-model:value="product.categoryId" placeholder="Enter product category id" />
             <a-button type="primary">{{ isEdit ? 'Update Product': 'Add Product' }}</a-button>
         </a-form>
         <a-divider />

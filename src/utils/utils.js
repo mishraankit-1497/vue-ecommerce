@@ -13,12 +13,12 @@ export const createProductCategory = (category) =>
 export const fetchCategories = () => apiClient.get("/product-categories");
 export const updateCategory = (category) =>
   apiClient.put("/product-categories", category);
-export const deleteCategory = (categoryId) =>
+export const removeCategory = (categoryId) =>
   apiClient.delete(`/product-categories/${categoryId}`);
 
 // products api call
 export const createProduct = (product) => apiClient.post("/shop", product);
 export const fetchProducts = () => apiClient.get("/shop");
 export const updateProduct = (product) => apiClient.put("/shop", product);
-export const deleteProduct = (productId) =>
+export const removeProduct = (productId) =>
   apiClient.delete(`/shop/${productId}`);

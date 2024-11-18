@@ -3,8 +3,8 @@ import { defineStore } from "pinia";
 import axios from "axios";
 import {
   createProduct,
-  deleteProduct,
   fetchProducts,
+  removeProduct,
   updateProduct,
 } from "@/utils/utils";
 
@@ -20,7 +20,7 @@ export const useProductStore = defineStore("productsStore", {
       //GET: Getting product list
       try {
         const fetchResponse = await fetchProducts();
-        this.products = fetchResponse.data;
+        this.products = fetchResponse.data
       } catch (error) {
         console.log("Failed to fetch products..", error);
       }
@@ -53,7 +53,7 @@ export const useProductStore = defineStore("productsStore", {
     },
     async removeProduct(productId) {
       try {
-        const response = await deleteProduct(productId);
+        const response = await removeProduct(productId);
         this.products = this.products.filter((p) => p.id !== productId);
       } catch (error) {
         console.error("Failed to update product", error);

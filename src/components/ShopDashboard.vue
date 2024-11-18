@@ -4,15 +4,17 @@ import ProductCategory from './forms/ProductCategory.vue';
 import Products from './forms/Products.vue';
 import { useCategoryStore } from '@/stores/categoryStore';
 import { useProductStore } from '@/stores/productsStore';
+import { onMounted, ref, watchEffect } from 'vue';
+import { storeToRefs } from 'pinia';
 export default {
     components: { ProductCategory, Products },
     setup() {
         const categoryStore = useCategoryStore();
         const productStore = useProductStore();
 
-        const { categories } = categoryStore;
-        const { products } = productStore;
-
+        const { categories } = storeToRefs(categoryStore);
+        const { products } = storeToRefs(productStore);
+console.log(products)
         const handleCategorySubmit = async (category) => {
             if (category.id) {
                 await categoryStore.updateCategory(category);
@@ -20,6 +22,11 @@ export default {
                 await categoryStore.createCategory(category)
             }
         }
+
+        onMounted(async () => {
+            await categoryStore.loadCategories()
+            await productStore.getProducts()
+        })
 
         const handleProductSubmit = async (product) => {
             if (product.id) {
@@ -30,7 +37,7 @@ export default {
         }
 
         const findCategory = (categoryId) => {
-            return categories.find(c => c.id == categoryId)
+            return categories.length && categories.find(c => c.id == categoryId)
         }
 
         const removeCategory = async (categoryId) => {
@@ -58,7 +65,11 @@ export default {
             editCategory,
             editProduct,
             categoryToEdit,
-            productToEdit
+            productToEdit,
+            categoryStore,
+            productStore,
+            categories,
+            products,
         }
 
     }
@@ -68,8 +79,10 @@ export default {
 
 <template>
     <div>
-        <ProductCategory @submitCategory="handleCategorySubmit" />
-        <Products :categories="categories" @submitProduct="handleProductSubmit" />
+        <ProductCategory :categoryToEdit="categoryToEdit" @addCategory="categoryStore.createCategory"
+            @updateCategory="categoryStore.updateCategory" @submitCategory="handleCategorySubmit" />
+        <Products :productToEdit="productToEdit" @addProduct="productStore.addProduct"
+            @updateProduct="productStore.updateProduct" :categories="categories" @submitProduct="handleProductSubmit" />
     </div>
     <div>
         <h3>Categories</h3>

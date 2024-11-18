@@ -2,7 +2,7 @@ import {
   fetchCategories,
   updateCategory,
   createProductCategory,
-  deleteCategory,
+  removeCategory,
 } from "@/utils/utils";
 import { defineStore } from "pinia";
 
@@ -15,6 +15,7 @@ export const useCategoryStore = defineStore("categoryStore", {
       try {
         const response = await fetchCategories();
         this.categories = response.data;
+        console.log(this.categories)
       } catch (error) {
         console.log("Failed to fetch category", error);
       }
@@ -41,7 +42,7 @@ export const useCategoryStore = defineStore("categoryStore", {
     },
     async removeCategory(categoryId) {
         try {
-          const response = await deleteCategory(categoryId);
+          const response = await removeCategory(categoryId);
           this.categories = this.categories.filter(c => c.id !== categoryId)
         } catch (error) {
           console.log("Failed to delete category", error);
