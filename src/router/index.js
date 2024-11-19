@@ -9,6 +9,11 @@ const router = createRouter({
       component: () => import("../components/ShopDashboard.vue"),
     },
     {
+      path: "/signup",
+      name: "signup",
+      component: () => import("../components/teleport/Signup.vue"),
+    },
+    {
       path: "/category",
       name: "category",
       component: () => import("../components/forms/ProductCategory.vue"),
