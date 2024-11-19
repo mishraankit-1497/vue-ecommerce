@@ -14,7 +14,6 @@ export default {
 
         const { categories } = storeToRefs(categoryStore);
         const { products } = storeToRefs(productStore);
-console.log(products)
         const handleCategorySubmit = async (category) => {
             if (category.id) {
                 await categoryStore.updateCategory(category);
@@ -88,7 +87,7 @@ console.log(products)
         <h3>Categories</h3>
         <ul>
             <li v-for="category in categories" :key="category.id">{{ category.title }}
-                <button @click="updateCategory(category)">Update</button>
+                <button @click="editCategory(category)">Update</button>
                 <button @click="removeCategory(category.id)">Delete</button>
             </li>
         </ul>
@@ -98,7 +97,7 @@ console.log(products)
         <ul>
             <li v-for="product in products" :key="product.id">{{ product.name }}
                 {Category: {{ findCategory(product.categoryId)?.title || 'Uncategorized' }}}
-                <button @click="updateProduct(product)">Update</button>
+                <button @click="editProduct(product)">Update</button>
                 <button @click="removeProduct(product.id)">Delete</button>
             </li>
         </ul>

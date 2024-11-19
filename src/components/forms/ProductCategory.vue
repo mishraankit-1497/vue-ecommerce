@@ -60,7 +60,7 @@ export default {
             <a-input v-model:value="category.title" id="title" placeholder="Enter category title" />
             <a-input v-model:value="category.routeName" id="routeName" placeholder="Enter route name" />
             <a-input v-model:value="category.imageUrl" id="imageUrl" placeholder="Enter image url" />
-            <a-button type="primary">{{ isEdit ? 'Update Category' : 'Add category' }}</a-button>
+            <button type="submit">{{ isEdit ? 'Update Category' : 'Add category' }}</button>
         </a-form>
         <a-divider />
 

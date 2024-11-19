@@ -59,7 +59,7 @@ export default {
             <a-input v-model:value="product.imageUrl" placeholder="Enter image url" />
             <a-input v-model:value="product.price" placeholder="Enter price" />
             <a-input v-model:value="product.categoryId" placeholder="Enter product category id" />
-            <a-button type="primary">{{ isEdit ? 'Update Product': 'Add Product' }}</a-button>
+            <button type="submit">{{ isEdit ? 'Update Product': 'Add Product' }}</button>
         </a-form>
         <a-divider />
     </div>
